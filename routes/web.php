@@ -29,7 +29,7 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        $assets = Asset::all();
+        $assets = Asset::whereBelongsTo(Auth::user())->get();
         return view('dashboard', ['assets' => $assets]);
     })->name('dashboard');
 
